@@ -31,13 +31,12 @@ pipeline {
         stage('Deploy to S3') {
             steps {
                 withAWS(credentials: 'aws-s3-creds', region: 'ap-south-1') {
-                    sh '''
-                    aws s3 rm s3://bs-jenkins-angular/ --recursive
-                    aws s3 cp dist/my-angular-app1/ s3://bs-jenkins-angular/ --recursive
-                    '''
-                }
-            }
+                    sh 'aws s3 rm s3://bs-jenkins-angular/ --recursive'
+                    sh 'aws s3 cp dist/my-angular-app1/browser/ s3://bs-jenkins-angular/ --recursive'
         }
+    }
+}
+
     }
 
     post {
